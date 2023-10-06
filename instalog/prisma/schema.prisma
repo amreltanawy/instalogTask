@@ -14,6 +14,8 @@ model Event {
   id          String   @id @default(uuid()) @map("_id") 
   actor_id    String
   actor_name  String
+  actor_email String
+  object      String
   group       String
   location    String
   occurred_at DateTime
@@ -21,7 +23,7 @@ model Event {
 
   action      EventAction @relation(fields: [action_id], references: [id])
   action_id   String
-  target      User @relation(fields: [target_id], references: [id])
+  target      String
   target_id   String
 }
 
@@ -31,10 +33,3 @@ model EventAction {
   events      Event[]
 }
 
-model User {
-  id          String   @id @default(uuid()) @map("_id")
-  email       String   @unique
-  name        String
-  password    String
-  events      Event[]
-}
